@@ -80,7 +80,7 @@ void setup() {
   //  currentColour = skyroraBlue;                                                                                 // Preset the starting LED colour, can be changed later in program
 
 
- countdownClock.setDigit(countdownClock.zero, 0, 0, 0, 0);
+ countdownClock.setDigit(countdownClock.zero, 0, 0, 0, 0);  // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
 
 }
 

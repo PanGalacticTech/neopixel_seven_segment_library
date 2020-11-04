@@ -170,34 +170,71 @@ class pixelSevenSegment {
     digitSeg A   = {1, 1, 1, 0, 1, 1, 1};
     digitSeg E   = {1, 0, 0, 1, 1, 1, 1};
     digitSeg i   = {0, 0, 1, 0, 0, 0, 0};
+    digitSeg O   = {1, 1, 1, 1, 1, 1, 0};
     digitSeg o   = {0, 0, 1, 1, 1, 0, 1};
     digitSeg U   = {0, 1, 1, 1, 1, 1, 0};
     digitSeg u   = {0, 0, 1, 1, 1, 0, 0};
 
-    digitSeg B;
-    digitSeg C;
-    digitSeg F;
-    digitSeg H;
-    digitSeg J;
+    digitSeg B   = {1, 1, 1, 1, 1, 1, 1};
+    digitSeg C   = {1, 0, 0, 1, 1, 1, 0};
+    digitSeg F   = {1, 0, 0, 0, 1, 1, 1};
+    digitSeg H   = {0, 1, 1, 0, 1, 1, 1};
+    digitSeg J   = {1, 1, 1, 1, 0, 0, 0};
+    digitSeg L   = {0, 0, 0, 1, 1, 1, 0};
 
-    digitSeg P;
-    digitSeg S;
+    digitSeg P   = {1, 1, 0, 0, 1, 1, 1};
+    digitSeg S   = {1, 0, 1, 1, 0, 1, 1};
 
 
 
-    digitSeg b;
-    digitSeg c;
-    digitSeg d;
-    digitSeg g;
-    digitSeg h;
-    digitSeg l;
-    digitSeg n;
-    digitSeg p;
-    digitSeg qu;
-    digitSeg r;
-    digitSeg t;
-    digitSeg y;
+    digitSeg b   = {0, 0, 1, 1, 1, 1, 1};
+    digitSeg c   = {0, 0, 0, 1, 1, 0, 1};
+    digitSeg d   = {0, 1, 1, 1, 1, 0, 1};
+    digitSeg g   = {1, 1, 1, 1, 0, 1, 1};
+    digitSeg h   = {0, 0, 1, 0, 1, 1, 1};
+    digitSeg l   = {0, 0, 0, 0, 1, 1, 0};
+    digitSeg n   = {0, 0, 1, 0, 1, 0, 1};
+    digitSeg p   = {1, 1, 0, 0, 1, 1, 1};
+    digitSeg qu  = {1, 1, 1, 0, 0, 1, 1};
+    digitSeg r   = {0, 0, 0, 0, 1, 0, 1};
+    digitSeg t   = {0, 0, 0, 1, 1, 1, 1};
+    digitSeg y   = {0, 1, 1, 1, 0, 1, 1};
     //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Colour Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Custom Colour Creator:
+    // use savedColour Constructor to craete custom colours that can be passed to the display
+
+    struct savedColour {             // data structure to save named RGB values that could be passed to functions
+      uint8_t r;
+      uint8_t g;
+      uint8_t b;
+    };
+
+
+    // Pick and Name Colours here, then add them to the colourArray to make them easily accessable
+
+
+    savedColour  skyroraBlue = { 0, 90, 255};    // Data structure for "skyroraBlue" colour as an RGB value
+
+    savedColour  offWhite = { 160, 255, 200};      // data structure for an offwhite colour, all LEDs on max (these figures chave been calibrated to produce a cleaner white)
+
+    savedColour  yellowOrange = {255, 160, 0};     // Holds Orange Colour as a nice contrast to the blue
+
+    savedColour  blackout = {0 , 0 , 0};          // data structure holding "black" - all LEDS off.
+
+    savedColour  currentColour;                  // data structure to hold the current LED colour
+
+
+    savedColour colourArray[3] = {skyroraBlue, offWhite, yellowOrange};     // array to hold different colour data structures. Makes it easy to cycle through them
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 
 
