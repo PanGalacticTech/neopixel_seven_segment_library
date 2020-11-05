@@ -87,8 +87,11 @@ void setup() {
   countdownClock.sevenSegSetup();
 
   Serial.println("Seven Seg Setup");
+  
 
-  CURRENT_COLOUR = countdownClock.skyroraBlue;
+  CURRENT_COLOUR = countdownClock.pureWhite;
+
+  
   // Preset the starting LED colour, can be changed later in program
   delay(100);
   countdownClock.setDigitsBlank();   // Set all digits to blank
