@@ -71,7 +71,7 @@ FASTLED_USING_NAMESPACE      // This line defines which template is used from th
 #define MAX_BRIGHTNESS 20
 
 
-
+#define CURRENT_COLOUR countdownClock.currentColour    // Macro to make main code more readable.
 
 
 
