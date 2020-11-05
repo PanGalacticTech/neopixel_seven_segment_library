@@ -52,7 +52,7 @@ FASTLED_USING_NAMESPACE      // This line defines which template is used from th
 
 
 
-#define DATA_PIN    2                   // Data pin connection to LED string
+#define DATA_PIN    22                  // Data pin connection to LED string
 //#define CLK_PIN   4                      // Not required for 3 pin LED strings
 #define LED_TYPE    WS2812B                // This must be set to match the specific LED driver used
 
@@ -60,13 +60,13 @@ FASTLED_USING_NAMESPACE      // This line defines which template is used from th
 
 #define COLOR_ORDER GRB
 
-#define NUM_LEDS 126                             //Number of LEDS in 6 digits (will add more for the sign and dots later  need at least 7 for +- and 4 for dots  
+#define NUM_LEDS 273  // is this depreciated?                             //Number of LEDS in 6 digits (will add more for the sign and dots later  need at least 7 for +- and 4 for dots  
 
 #define NUM_DIGITS 6
-#define LED_PER_SEG 3
+#define LED_PER_SEG 6
 #define ADDITIONAL_LEDS 21
 
-#define TOTAL_LEDS 147      //((number_digits * leds_per_segment * 7)+extra_leds);
+#define TOTAL_LEDS 273      //((number_digits * leds_per_segment * 7)+extra_leds);
 
 #define MAX_BRIGHTNESS 20
 
@@ -79,12 +79,13 @@ class pixelSevenSegment {
 
   public:
 
+    int total_leds;
+
     CRGBArray<TOTAL_LEDS> ledString;
 
     //Constructor
 
-    pixelSevenSegment(int number_digits = 6, int leds_per_segment = 3, int extra_leds = 21):
-
+    pixelSevenSegment(int number_digits = 6, int leds_per_segment = 6, int extra_leds = 21):
 
       total_leds((number_digits * leds_per_segment) + extra_leds),
       ledString()
@@ -117,7 +118,9 @@ class pixelSevenSegment {
 
     void setDots(uint8_t red, uint8_t green, uint8_t blue);
 
-    int total_leds;
+    void setDigitsBlank();
+
+    void setAllDigitsX(digitSeg X, byte r = 255, byte g = 255, byte b = 255);
 
 
     // These values are passed bit arrays to print specific digits to each character in the display
@@ -209,6 +212,7 @@ class pixelSevenSegment {
     // Custom Colour Creator:
     // use savedColour Constructor to craete custom colours that can be passed to the display
 
+
     struct savedColour {             // data structure to save named RGB values that could be passed to functions
       uint8_t r;
       uint8_t g;
@@ -219,7 +223,7 @@ class pixelSevenSegment {
     // Pick and Name Colours here, then add them to the colourArray to make them easily accessable
 
 
-    savedColour  skyroraBlue = { 0, 90, 255};    // Data structure for "skyroraBlue" colour as an RGB value
+    savedColour  skyroraBlue = { 0, 120, 255};    // Data structure for "skyroraBlue" colour as an RGB value
 
     savedColour  offWhite = { 160, 255, 200};      // data structure for an offwhite colour, all LEDs on max (these figures chave been calibrated to produce a cleaner white)
 
@@ -227,10 +231,14 @@ class pixelSevenSegment {
 
     savedColour  blackout = {0 , 0 , 0};          // data structure holding "black" - all LEDS off.
 
+    savedColour  pureWhite = {255, 255, 255};
+
     savedColour  currentColour;                  // data structure to hold the current LED colour
 
 
-    savedColour colourArray[3] = {skyroraBlue, offWhite, yellowOrange};     // array to hold different colour data structures. Makes it easy to cycle through them
+    savedColour colourArray[4] = {skyroraBlue, offWhite, yellowOrange, pureWhite};     // array to hold different colour data structures. Makes it easy to cycle through them
+
+    uint8_t colourSelect = 0;  // Variable to hold the current selected colour from colourArray
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

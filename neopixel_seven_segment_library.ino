@@ -33,6 +33,10 @@
 #include <autoDelay.h>
 #include "pixelSevenSegment.h"
 
+pixelSevenSegment countdownClock;
+
+#include "animations.h"
+
 
 
 //#define NUM_LEDS   21                        // Number of LEDs in a single digit [Depreciated]
@@ -56,7 +60,7 @@ uint8_t maxBrightness = 20;                      // Define the max brightness of
 // These LEDs can draw a decent amount of current and require a decent PSU. 10A @ 5v Recommended
 
 
-int8_t colourSelect = 0;                        // selectes the display colour. 0 = skyrora blue, 1 = offwhite, 2 = yellowOrange. (currently cycles through each)
+
 
 //@@@@@@@@@@@\\\ Options ///@@@@@@@@@@@@@@@@@@@
 
@@ -66,22 +70,63 @@ unsigned long updateDisplayDelay = 1000;  //   (will also be used to slow down p
 unsigned long lastDisplayUpdate;        // save the time of the last update
 
 
+#define CURRENT_COLOUR countdownClock.currentColour    // Macro to make code more readable
 
-pixelSevenSegment countdownClock;
+
 
 autoDelay ledDelay;
 
 
 
+
 void setup() {
+  Serial.begin(115200);
+
+  Serial.println("Clock Initializing...");
 
   countdownClock.sevenSegSetup();
 
-  //  currentColour = skyroraBlue;                                                                                 // Preset the starting LED colour, can be changed later in program
+  Serial.println("Seven Seg Setup");
+
+  CURRENT_COLOUR = countdownClock.skyroraBlue;
+  // Preset the starting LED colour, can be changed later in program
+  delay(100);
+  countdownClock.setDigitsBlank();   // Set all digits to blank
+  delay (200);
+  FastLED.show();
+  Serial.println("||    ~~Set Digits Blank~~    ||");
 
 
- countdownClock.setDigit(countdownClock.zero, 0, 0, 0, 0);  // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+  delay(500);
 
+  for (int j = 0; j < 6 ; j++) {
+    countdownClock.setDigit(countdownClock.alldigits[8], j, CURRENT_COLOUR.r, CURRENT_COLOUR.g, CURRENT_COLOUR.b);  // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+    Serial.printf("Set Digit %i 8" , j);
+    Serial.println("");
+    FastLED.show();
+    delay(100);
+  }
+
+
+
+  delay(1000);
+  countdownClock.setDigitsBlank();   // Set all digits to blank
+  delay(100);
+  FastLED.show();
+  Serial.println("Setting Digits Blank");
+  delay(500);
+
+  //countdownClock.setAllDigitsX(countdownClock.H, 255, 255, 255);
+
+  printArora();
+  delay(100);
+  FastLED.show();
+  Serial.println("Setup Complete, Clock Starting:");
+
+  delay(2000);
+  countdownClock.setDigitsBlank();   // Set all digits to blank
+  delay(100);
+  FastLED.show();
 }
 
 
@@ -96,20 +141,40 @@ void setup() {
 void loop() {
 
 
+  // Set up displayed digits with correct bit arrays for the current time
+  countdownClock.displayedDigits[0] = countdownClock.alldigits[0];
+  countdownClock.displayedDigits[1] = countdownClock.alldigits[1];
+  countdownClock.displayedDigits[2] = countdownClock.alldigits[2];
+  countdownClock.displayedDigits[3] = countdownClock.alldigits[3];
+  countdownClock.displayedDigits[4] = countdownClock.alldigits[4];
+  countdownClock.displayedDigits[5] = countdownClock.alldigits[5];
 
-  countdownClock.setDigit(countdownClock.blank, 0, 0, 75, 255);       //passed (digitSeg.CHARACTER_NAME, digit_Number, red, green, blue)
 
 
+  //Set The digit with the data passed from presaved bit arrays
 
-if (ledDelay.millisDelay(200)){
-
-  FastLED.show();    // trying this on every loop to see if it works more smoothly
-
+for (int q = 0; q < 6; q++){
   
+  countdownClock.setDigit(countdownClock.displayedDigits[q], q, CURRENT_COLOUR.r, CURRENT_COLOUR.g, CURRENT_COLOUR.b);  // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
+
+
+  Serial.printf("Set Digit %i to ~", q);
+  Serial.println("");
+
 }
 
 
-delay(1000);
+ // Print data to the LED strip
+
+if (ledDelay.millisDelay(200)) {
+
+  FastLED.show();    // trying this on every loop to see if it works more smoothly
+
+
+}
+
+
+
 
 
 }
