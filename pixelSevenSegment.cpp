@@ -38,13 +38,15 @@
 
 
 
-void pixelSevenSegment::sevenSegSetup() {
+void pixelSevenSegment::sevenSegSetup(byte brightness) {
 
   FastLED.addLeds<LED_TYPE, DATA_PIN, COLOR_ORDER>(ledString, TOTAL_LEDS).setCorrection(TypicalLEDStrip);            // This sets up our LED string object
 
 
   // set master brightness control
-  FastLED.setBrightness(MAX_BRIGHTNESS);                                                                        // Sets the brightness for the entire string
+  FastLED.setBrightness(brightness);    
+  // Sets the brightness for the entire string
+  currentBrightness = brightness;
 
 
 

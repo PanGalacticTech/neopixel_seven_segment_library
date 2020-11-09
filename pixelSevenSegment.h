@@ -112,7 +112,7 @@ class pixelSevenSegment {
 
 
 
-    void sevenSegSetup();
+    void sevenSegSetup(byte brightness = 20);
 
     void setDigit (digitSeg current, int8_t digitNumber, uint8_t red, uint8_t green, uint8_t blue );
 
@@ -239,6 +239,8 @@ class pixelSevenSegment {
     savedColour colourArray[4] = {skyroraBlue, offWhite, yellowOrange, pureWhite};     // array to hold different colour data structures. Makes it easy to cycle through them
 
     uint8_t colourSelect = 0;  // Variable to hold the current selected colour from colourArray
+	
+	uint8_t currentBrightness;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
