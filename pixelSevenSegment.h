@@ -52,6 +52,27 @@ FASTLED_USING_NAMESPACE      // This line defines which template is used from th
 
 
 
+#define DATA_PIN    22                  // Data pin connection to LED string
+//#define CLK_PIN   4                      // Not required for 3 pin LED strings
+#define LED_TYPE    WS2812B                // This must be set to match the specific LED driver used
+
+//#define LED_TYPE WS2811_400               //
+
+#define COLOR_ORDER GRB
+
+//#define NUM_LEDS 273  // is this depreciated?                             //Number of LEDS in 6 digits (will add more for the sign and dots later  need at least 7 for +- and 4 for dots  
+
+#define NUM_DIGITS 6
+#define LED_PER_SEG 6
+#define ADDITIONAL_LEDS 21
+
+#define TOTAL_LEDS 273      //((number_digits * leds_per_segment * 7)+extra_leds);
+
+#define MAX_BRIGHTNESS 20
+
+
+#define CURRENT_COLOUR countdownClock.currentColour    // Macro to make main code more readable.
+
 
 
 
@@ -220,7 +241,7 @@ class pixelSevenSegment {
 
     uint8_t colourSelect = 0;  // Variable to hold the current selected colour from colourArray
 
-    void changeColourName(byte red, byte green, byte blue);
+    void changeColourRGB(byte red, byte green, byte blue);
     void changeColourStruc(savedColour newColour);
 
     uint8_t currentBrightness;

@@ -190,14 +190,14 @@ void pixelSevenSegment::setDots(uint8_t red, uint8_t green, uint8_t blue ) {
 }
 
 
-void changeColourName(byte red, byte green, byte blue) {
+void pixelSevenSegment::changeColourRGB(byte red, byte green, byte blue) {
 
   currentColour.r = red;
   currentColour.g = green;
   currentColour.b = blue;
 }
 
-void changeColourStruc(savedColour newColour) {
+void pixelSevenSegment::changeColourStruc(savedColour newColour) {
 
   currentColour = newColour;
 
