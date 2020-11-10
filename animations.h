@@ -2,11 +2,7 @@
 
 
 void printArora(uint32_t animationDelay = 500 ) {
-
-
   for (int j = 6; j > 0 ; j--) {
-
-
     countdownClock.setDigit(countdownClock.A, 6 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
     countdownClock.setDigit(countdownClock.r, 5 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
     countdownClock.setDigit(countdownClock.o, 4 - j, 0, 130, 255); // Passed Arguments (digitSeg.bitarray, digitNumber, red, green, blue)
@@ -19,6 +15,4 @@ void printArora(uint32_t animationDelay = 500 ) {
     FastLED.show();
     delay(animationDelay);
   }
-
-
 }

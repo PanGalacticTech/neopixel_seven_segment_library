@@ -44,7 +44,7 @@ void pixelSevenSegment::sevenSegSetup(byte brightness) {
 
 
   // set master brightness control
-  FastLED.setBrightness(brightness);    
+  FastLED.setBrightness(brightness);
   // Sets the brightness for the entire string
   currentBrightness = brightness;
 
@@ -104,49 +104,49 @@ void pixelSevenSegment::setDigit (digitSeg current, int8_t digitNumber, uint8_t 
 
 
 
-  if (current.A) {  
+  if (current.A) {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB(red, green, blue);
   } else {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB::Black;
   }
 
 
- s = (LED_PER_SEG);
- 
-  if (current.B) {   
+  s = (LED_PER_SEG);
+
+  if (current.B) {
     ledString((s + q ), (s + LED_PER_SEG + q - 1)) = CRGB(red, green, blue);
   } else {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB::Black;
   }
 
- s = ((LED_PER_SEG) * 2);
+  s = ((LED_PER_SEG) * 2);
 
-  if (current.C) {   
+  if (current.C) {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB(red, green, blue);
   } else {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB::Black;
   }
 
- s = ((LED_PER_SEG) * 3);
+  s = ((LED_PER_SEG) * 3);
 
-  if (current.D) {   
+  if (current.D) {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB(red, green, blue);
   } else {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB::Black;
   }
 
 
- s = ((LED_PER_SEG) * 4);
- 
-  if (current.E) {   
+  s = ((LED_PER_SEG) * 4);
+
+  if (current.E) {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB(red, green, blue);
   } else {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB::Black;
   }
 
- s = ((LED_PER_SEG) * 5);
- 
-  if (current.F) {   
+  s = ((LED_PER_SEG) * 5);
+
+  if (current.F) {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB(red, green, blue);
   } else {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB::Black;
@@ -154,8 +154,8 @@ void pixelSevenSegment::setDigit (digitSeg current, int8_t digitNumber, uint8_t 
 
 
   s = ((LED_PER_SEG) * 6);
-  
-  if (current.G) {  
+
+  if (current.G) {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB(red, green, blue);
   } else {
     ledString((s + q), (s + LED_PER_SEG + q - 1)) = CRGB::Black;
@@ -187,6 +187,19 @@ void pixelSevenSegment::setDots(uint8_t red, uint8_t green, uint8_t blue ) {
 
   ledString(d, (d + 4)) = CRGB(red, green, blue);
 
+}
+
+
+void changeColourName(byte red, byte green, byte blue) {
+
+  currentColour.r = red;
+  currentColour.g = green;
+  currentColour.b = blue;
+}
+
+void changeColourStruc(savedColour newColour) {
+
+  currentColour = newColour;
 
 
 }
