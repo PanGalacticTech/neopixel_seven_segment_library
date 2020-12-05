@@ -60,7 +60,7 @@ FASTLED_USING_NAMESPACE      // This line defines which template is used from th
 
 #define COLOR_ORDER GRB
 
-//#define NUM_LEDS 273  // is this depreciated?                             //Number of LEDS in 6 digits (will add more for the sign and dots later  need at least 7 for +- and 4 for dots  
+//#define NUM_LEDS 273  // is this depreciated?                             //Number of LEDS in 6 digits (will add more for the sign and dots later  need at least 7 for +- and 4 for dots
 
 #define NUM_DIGITS 6
 #define LED_PER_SEG 6
@@ -68,10 +68,12 @@ FASTLED_USING_NAMESPACE      // This line defines which template is used from th
 
 #define TOTAL_LEDS 273      //((number_digits * leds_per_segment * 7)+extra_leds);
 
+#define LEDS_IN_TPLUS 16
+
 #define MAX_BRIGHTNESS 20
 
 
-#define CURRENT_COLOUR countdownClock.currentColour    // Macro to make main code more readable.
+//#define CURRENT_COLOUR countdownClock.currentColour    // Macro to make main code more readable.
 
 
 
@@ -117,11 +119,21 @@ class pixelSevenSegment {
 
     void setDigit (digitSeg current, int8_t digitNumber, uint8_t red, uint8_t green, uint8_t blue );
 
-    void setDots(uint8_t red, uint8_t green, uint8_t blue);
+
+
+    void setDotsRGB(uint8_t red = 255, uint8_t green = 255, uint8_t blue = 255);   // Ignore does not work atm
+
+
+    void setStringRGB(uint16_t start, uint16_t to, uint8_t red, uint8_t green, uint8_t blue);   // Sets any string of LEDs to the passed colour values
+
+
 
     void setDigitsBlank();
 
     void setAllDigitsX(digitSeg X, byte r = 255, byte g = 255, byte b = 255);
+
+    void changeBrightness(byte bright = 255);
+
 
 
     // These values are passed bit arrays to print specific digits to each character in the display
@@ -224,7 +236,9 @@ class pixelSevenSegment {
     // Pick and Name Colours here, then add them to the colourArray to make them easily accessable
 
 
-    savedColour  skyroraBlue = { 0, 120, 255};    // Data structure for "skyroraBlue" colour as an RGB value
+    savedColour  skyBlue = { 0, 80, 255};    // Data structure for "skyroraBlue" colour as an RGB value
+
+    savedColour     pureBlue = {0, 0, 255};
 
     savedColour  offWhite = { 160, 255, 200};      // data structure for an offwhite colour, all LEDs on max (these figures chave been calibrated to produce a cleaner white)
 
@@ -237,12 +251,18 @@ class pixelSevenSegment {
     savedColour  currentColour;                  // data structure to hold the current LED colour
 
 
-    savedColour colourArray[4] = {skyroraBlue, offWhite, yellowOrange, pureWhite};     // array to hold different colour data structures. Makes it easy to cycle through them
+    savedColour colourArray[4] = {skyBlue, offWhite, yellowOrange, pureWhite};     // array to hold different colour data structures. Makes it easy to cycle through them
 
     uint8_t colourSelect = 0;  // Variable to hold the current selected colour from colourArray
 
     void changeColourRGB(byte red, byte green, byte blue);
     void changeColourStruc(savedColour newColour);
+
+    void  setDigit_colourName(digitSeg input, int8_t digitNum, savedColour inputColour);
+    void setDotsName(savedColour newColour);
+    void setStringName(uint16_t start, uint16_t to, savedColour newColour);
+
+    void flyingDigit(digitSeg in, savedColour inputColour, uint32_t animationDelay = 100);
 
     uint8_t currentBrightness;
 
@@ -251,13 +271,10 @@ class pixelSevenSegment {
 
 
 
-
-
-
   private:
 
 
-
+    uint8_t iteration = 0;   // used for iterating animation effects through mulitple loops
 
 
 
